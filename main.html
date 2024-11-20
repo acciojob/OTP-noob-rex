@@ -1,16 +1,69 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verification Code</title>
+  <style>
+    .code-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .code {
+      width: 40px;
+      height: 50px;
+      text-align: center;
+      font-size: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    #verification_heading {
+      text-align: center;
+      font-size: 24px;
+      margin-top: 20px;
+    }
+    #verification_subtext {
+      text-align: center;
+      font-size: 16px;
+      color: gray;
+    }
+  </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+  <h1 id="verification_heading">Verification</h1>
+  <h2 id="verification_subtext">Enter the 6-digit code sent to you</h2>
+  <div class="code-container" id="code-container">
+    <input type="text" maxlength="1" class="code" />
+    <input type="text" maxlength="1" class="code" />
+    <input type="text" maxlength="1" class="code" />
+    <input type="text" maxlength="1" class="code" />
+    <input type="text" maxlength="1" class="code" />
+    <input type="text" maxlength="1" class="code" />
+  </div>
 
+  <script>
+    const inputs = document.querySelectorAll(".code");
+
+    inputs.forEach((input, index) => {
+      input.addEventListener("input", (e) => {
+        const value = e.target.value;
+        if (value) {
+          if (index < inputs.length - 1) {
+            inputs[index + 1].focus();
+          }
+        }
+      });
+
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Backspace") {
+          if (!e.target.value && index > 0) {
+            inputs[index - 1].focus();
+          }
+        }
+      });
+    });
+  </script>
 </body>
-
 </html>
